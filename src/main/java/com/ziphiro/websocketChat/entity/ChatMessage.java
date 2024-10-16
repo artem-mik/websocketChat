@@ -1,5 +1,6 @@
 package com.ziphiro.websocketChat.entity;
 
+import com.ziphiro.websocketChat.enums.MessageType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,7 +22,11 @@ public class ChatMessage {
     private Long id;
     private String username;
     private String content;
+
     @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private MessageType type;
 }
