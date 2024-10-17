@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
 public class ChatRoomServiceImpl implements ChatRoomService {
 
     private final ConcurrentHashMap <Long, ChatRoom> rooms = new ConcurrentHashMap<>();
