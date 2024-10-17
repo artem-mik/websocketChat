@@ -13,7 +13,11 @@ public class ApplicationConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**");
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:8080")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Разрешённые HTTP методы
+                        .allowedHeaders("*")  // Разрешить любые заголовки
+                        .allowCredentials(true);;
             }
         };
     }
