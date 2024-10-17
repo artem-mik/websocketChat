@@ -1,6 +1,9 @@
-package com.ziphiro.websocketChat.jwt;
+package com.ziphiro.websocketChat.controller;
 
 import com.ziphiro.websocketChat.dto.RegisterRequest;
+import com.ziphiro.websocketChat.jwt.AuthenticationRequest;
+import com.ziphiro.websocketChat.jwt.AuthenticationResponse;
+import com.ziphiro.websocketChat.jwt.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
