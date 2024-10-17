@@ -1,28 +1,29 @@
 package com.ziphiro.websocketChat.service.impl;
 
 import com.ziphiro.websocketChat.entity.ChatRoom;
+import com.ziphiro.websocketChat.repository.ChatRoomRepository;
 import com.ziphiro.websocketChat.service.ChatRoomService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
+@RequiredArgsConstructor
 public class ChatRoomServiceImpl implements ChatRoomService {
 
+    private final ChatRoomRepository chatRoomRepository;
     private final ConcurrentHashMap <Long, ChatRoom> rooms = new ConcurrentHashMap<>();
 
     @Override
     public ChatRoom createRoom(String roomName) {
-        ChatRoom room = ChatRoom.builder().name(roomName).build();
-        rooms.put(room.getId(), room);
-        return room;
+        return chatRoomRepository.save(ChatRoom.builder().id(null).name(roomName).build());
     }
 
     @Override
     public ChatRoom getRoom(Long roomId) {
-        return rooms.get(roomId);
+        return chatRoomRepository.findChatRoomById(roomId);
     }
 
     @Override
@@ -33,5 +34,10 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     @Override
     public void deleteUserFromRoom(Long roomId, String userName) {
         getRoom(roomId).getUsers().remove(userName);
+    }
+
+    @Override
+    public List<ChatRoom> getAllRooms() {
+        return chatRoomRepository.findAll().stream().toList();
     }
 }
